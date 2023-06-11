@@ -2,11 +2,24 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 
 import { type Context } from "./context";
+import { ZodError } from "zod";
 
 const t = initTRPC.context<Context>().create({
   transformer: superjson,
-  errorFormatter({ shape }) {
-    return shape;
+  errorFormatter(opts) {
+    const { shape, error } = opts;
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError:
+        // エラーコードがBAD_REQUESTかつエラーの原因がzod関係
+          error.code === 'BAD_REQUEST' && error.cause instanceof ZodError
+          // zodの複雑なエラーメッセージをフロントエンドで扱いやすい様にフォーマット
+            ? error.cause.flatten()
+            : null,
+      },
+    };
   },
 });
 

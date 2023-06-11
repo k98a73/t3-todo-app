@@ -15,6 +15,12 @@ export const trpc = createTRPCNext<AppRouter>({
   config() {
     return {
       transformer: superjson,
+      queryClientConfig: {
+        defaultOptions: {
+          // フェッチに失敗してもリトライしない。画面からフォーカスを外して、再度フォーカスを当てた際にフェッチを走らせない。
+          queries: { retry: false, refetchOnWindowFocus: false },
+        },
+      },
       links: [
         loggerLink({
           enabled: (opts) =>
