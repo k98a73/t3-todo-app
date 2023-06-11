@@ -11,6 +11,7 @@ export const updateTaskSchema = z.object({
   taskId: z.string().cuid(),
   title: z.string().max(20),
   body: z.string().min(5),
+  updatedAt: z.nullable(z.date()),
 });
 
 export type updateTaskInput = z.TypeOf<typeof updateTaskSchema>;

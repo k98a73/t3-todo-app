@@ -21,6 +21,7 @@ export const TaskForm = () => {
         taskId: editedTask.taskId,
         title: editedTask.title,
         body: editedTask.body,
+        updatedAt: new Date()
       });
     }
   };

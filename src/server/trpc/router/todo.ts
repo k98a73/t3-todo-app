@@ -60,6 +60,7 @@ export const todoRouter = router({
         data: {
           title: input.title,
           body: input.body,
+          updatedAt: new Date(),
         },
       });
       return task;
