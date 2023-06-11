@@ -40,6 +40,8 @@ export const TaskForm = () => {
       <p className="mb-3 text-pink-500">
         {createTaskMutation.error?.data?.zodError &&
           createTaskMutation.error.data.zodError.fieldErrors.title}
+        {updateTaskMutation.error?.data?.zodError &&
+          updateTaskMutation.error.data.zodError.fieldErrors.title}
       </p>
       <textarea
         className="mb-3 border border-gray-300 px-3 py-2"
@@ -50,6 +52,8 @@ export const TaskForm = () => {
       <p className="mb-3 text-pink-500">
         {createTaskMutation.error?.data?.zodError &&
           createTaskMutation.error.data.zodError.fieldErrors.body}
+        {updateTaskMutation.error?.data?.zodError &&
+          updateTaskMutation.error.data.zodError.fieldErrors.body}
       </p>
       <button className="rounded bg-indigo-600 px-3 py-1 text-white hover:bg-indigo-700 focus:outline-none">
         {editedTask.taskId === "" ? "Create" : "Update"}
